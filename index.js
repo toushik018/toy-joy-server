@@ -55,29 +55,30 @@ async function run() {
 
     // Load mytoys data
 
-    app.get('/mytoys', async(req, res) => {
+    app.get('/mytoys', async (req, res) => {
       console.log(req.query.sellerEmail);
       let query = {};
-      if(req.query?.sellerEmail){
-        query = {sellerEmail: req.query.sellerEmail}
+      if (req.query?.sellerEmail) {
+        query = { sellerEmail: req.query.sellerEmail }
       }
-
       const result = await toysCollection.find(query).toArray();
       res.send(result)
-
     })
 
-    // app.get('/mytoys/:id', async (req, res) => {
-    //   const id = req.params._id;
 
-    //   try {
-    //     const result = await toysCollection.find({ id }).toArray();
-    //     res.send(result);
-    //   } catch (error) {
-    //     console.log(error);
-    //     res.status(500).json({ message: "Failed to retrieve toys for the user from the database" });
-    //   }
-    // });
+    //Update operation
+    
+
+    // delete
+
+    app.delete('/mytoys/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) }
+      const result =await toysCollection.deleteOne(query);
+      res.send(result);
+    })
+
+
 
 
 
