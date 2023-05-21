@@ -56,11 +56,22 @@ async function run() {
     // Load mytoys data
 
     app.get('/mytoys', async (req, res) => {
+      // console.log(req.query.sellerEmail);
+      // let query = {};
+      // if (req.query?.sellerEmail) {
+      //   query = { sellerEmail: req.query.sellerEmail }
+      // }
+      // console.log(query);
+      const result = await toysCollection.find().toArray();
+      res.send(result)
+    })
+
+
+    app.get('/search', async (req, res) => {
       console.log(req.query.sellerEmail);
-      let query = {};
-      if (req.query?.sellerEmail) {
-        query = { sellerEmail: req.query.sellerEmail }
-      }
+      const email = req.query.sellerEmail;
+      const query = {sellerEmail: email}
+      console.log(query);
       const result = await toysCollection.find(query).toArray();
       res.send(result)
     })
