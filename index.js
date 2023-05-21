@@ -61,7 +61,6 @@ async function run() {
       // if (req.query?.sellerEmail) {
       //   query = { sellerEmail: req.query.sellerEmail }
       // }
-      // console.log(query);
       const result = await toysCollection.find().toArray();
       res.send(result)
     })
