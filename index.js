@@ -48,10 +48,7 @@ async function run() {
       const query = { _id: new ObjectId(id) }
       const result = await toysCollection.findOne(query);
       res.send(result);
-
-
     });
-
 
     // Load mytoys data
 
@@ -64,7 +61,6 @@ async function run() {
       const result = await toysCollection.find().toArray();
       res.send(result)
     })
-
 
     app.get('/search', async (req, res) => {
       console.log(req.query.sellerEmail);
