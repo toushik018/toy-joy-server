@@ -65,11 +65,20 @@ async function run() {
     app.get('/search', async (req, res) => {
       console.log(req.query.sellerEmail);
       const email = req.query.sellerEmail;
+      const sort = req.query.sort;
       const query = { sellerEmail: email }
       console.log(query);
-      const result = await toysCollection.find(query).toArray();
-      res.send(result)
-    })
+
+      let sortQuery = {};
+
+      if (sort === 'asc') {
+        sortQuery = { price: 1 }; // Sort in ascending 
+      } else if (sort === 'desc') {
+        sortQuery = { price: -1 }; // Sort in descending 
+      }
+      const result = await toysCollection.find(query).sort(sortQuery).toArray();
+      res.send(result);
+    });
 
 
     //Update operation
